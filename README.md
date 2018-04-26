@@ -1,7 +1,8 @@
 # zfs-integration
 Integration of ZFS into Virtualization Software
 
-TODO:
+# TODO:
+
 ZFS Installation
 
 1. Install from source/repo
@@ -11,9 +12,9 @@ ZFS Installation
 Integration of ZFS into libvirt
 
 1. Spec Build
-  1. Dependencies
+    1. Dependencies
 1. Installation
   
 Integration of ZFS into OpenNebula
 
-1, Configuration of ZFS datastore
+1. Configuration of ZFS datastore
