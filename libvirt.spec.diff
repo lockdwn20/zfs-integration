@@ -1,0 +1,103 @@
+--- libvirt.spec.orig   2018-03-06 14:54:01.000000000 -0500
++++ libvirt.spec        2018-04-30 15:45:25.619096327 -0400
+@@ -70,6 +70,7 @@
+     %define with_storage_sheepdog 0
+ %endif
+ %define with_storage_gluster 0%{!?_without_storage_gluster:1}
++%define with_storage_zfs 0%{!?_without_storage_zfs:1}
+ %define with_numactl          0%{!?_without_numactl:1}
+
+ # A few optional bits off by default, we enable later
+@@ -228,7 +229,7 @@
+ Summary: Library providing a simple virtualization API
+ Name: libvirt
+ Version: 3.2.0
+-Release: 14%{?dist}.9%{?extra_release}
++Release: 14zfs%{?dist}.9%{?extra_release}
+ License: LGPLv2+
+ Group: Development/Libraries
+ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+@@ -644,6 +645,9 @@
+ BuildRequires: glusterfs-api-devel >= 3.4.1
+ BuildRequires: glusterfs-devel >= 3.4.1
+ %endif
++%if %{with_storage_zfs}
++BuildRequires: zfs >= 0.7.8
++%endif
+ %if %{with_storage_sheepdog}
+ BuildRequires: sheepdog
+ %endif
+@@ -954,6 +958,19 @@
+ %endif
+
+
++%if %{with_storage_zfs}
++%package daemon-driver-storage-zfs
++Summary: Storage Driver plugin for ZFS
++Group: Developmnet/Libraries
++Requires: libvirt-daemon-driver-storage-core = %{version}-%{release}
++Requires: /usr/sbin/zfs
++
++%description daemon-driver-storage-zfs
++The storage driver backend adding implementation of the storage APIs for zfs
++volumes using the zfs proitocol
++%endif
++
++
+ %if %{with_storage_rbd}
+ %package daemon-driver-storage-rbd
+ Summary: Storage driver plugin for rbd
+@@ -991,6 +1008,9 @@
+ %if %{with_storage_gluster}
+ Requires: libvirt-daemon-driver-storage-gluster = %{version}-%{release}
+ %endif
++%if %{with_storage_zfs}
++Requires: libvirt-daemon-driver-storage-zfs = %{version}-%{release}
++%endif
+ %if %{with_storage_rbd}
+ Requires: libvirt-daemon-driver-storage-rbd = %{version}-%{release}
+ %endif
+@@ -1470,6 +1490,12 @@
+     %define arg_storage_gluster --without-storage-gluster
+ %endif
+
++%if %{with_storage_zfs}
++    %define arg_storage_zfs --with-storage-zfs
++%else
++    %define arg_storage_zfs --without-storage-zfs
++%endif
++
+ %if %{with_numactl}
+     %define arg_numactl --with-numactl
+ %else
+@@ -1578,7 +1604,7 @@
+            %{?arg_storage_rbd} \
+            %{?arg_storage_sheepdog} \
+            %{?arg_storage_gluster} \
+-           --without-storage-zfs \
++           %{?arg_storage_zfs} \
+            --without-storage-vstorage \
+            %{?arg_numactl} \
+            %{?arg_numad} \
+@@ -2130,6 +2156,11 @@
+ %{_libdir}/%{name}/storage-backend/libvirt_storage_backend_gluster.so
+ %endif
+
++%if %{with_storage_zfs}
++%files daemon-driver-storage-zfs
++%{_libdir}/%{name}/storage-backend/libvirt_storage_backend_zfs.so
++%endif
++
+ %if %{with_storage_rbd}
+ %files daemon-driver-storage-rbd
+ %{_libdir}/%{name}/storage-backend/libvirt_storage_backend_rbd.so
+@@ -2359,6 +2390,9 @@
+
+
+ %changelog
++* Mon Apr 30 2018 NAME <email@email.com> - 3.2.0-14zfs
++- zfs: Added zfs support for libvirt
++
+ * Fri Jan 19 2018 Jiri Denemark <jdenemar@redhat.com> - 3.2.0-14.el7_4.9
+ - qemu: Fix crash in offline migration (rhbz#1530130)
+ - RHEL: qemu: Report full stats for completed migration (rhbz#1530130)
