@@ -22,7 +22,7 @@ Integration of ZFS into libvirt
 1. Spec Build
     * yum install yum-utils rpm-build
     * yumdownloader --source libvirt
-    * rpm -ivh ./libvirt-<<VERSION>.src.rpm
+    * rpm -ivh ./libvirt-<<VERSION>>.src.rpm
     * cp ~/rpmbuild/SPECS/libvirt.spec ~/rpmbuild/SPECS/libvirt.spec.orig
     * vi ~/rpmbuild/SPECS/libvirt.spec
         * Integrate ZFS into spec file
