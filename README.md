@@ -20,7 +20,15 @@ ZFS Installation
 Integration of ZFS into libvirt
 
 1. Spec Build
-    1. Dependencies
+    * yum install yum-utils rpm-build
+    * yumdownloader --source libvirt
+    * rpm -ivh ./libvirt-<<VERSION>.src.rpm
+    * cp ~/rpmbuild/SPECS/libvirt.spec ~/rpmbuild/SPECS/libvirt.spec.orig
+    * vi ~/rpmbuild/SPECS/libvirt.spec
+        * Integrate ZFS into spec file
+    * yum-buildep libvirt
+    * rpmbuild -ba ~/rpmbuild/SPECS/libvirt.spec
+    
 1. Installation
   
 Integration of ZFS into OpenNebula
