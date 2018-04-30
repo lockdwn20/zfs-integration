@@ -14,9 +14,9 @@ ZFS Installation
     * yum install kernel-devel zfs
     * lsmod | grep zfs
         * modprobe zfs
-1. initial setup
 1. pool setup
-  
+    * zpool create <<POOL_NAME>> raidz DEV1 DEV2...
+    
 Integration of ZFS into libvirt
 
 1. Spec Build
