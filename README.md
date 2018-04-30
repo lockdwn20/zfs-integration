@@ -34,6 +34,8 @@ Integration of ZFS into libvirt
     * vi /etc/yum.repos.d/libvirt.repo
         * Add local repo data
     * yum update
+    * yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
+    
     
 Integration of ZFS into OpenNebula
 
