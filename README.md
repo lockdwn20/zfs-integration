@@ -35,6 +35,19 @@ Integration of ZFS into libvirt
         * Add local repo data
     * yum update
     * yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
+    * to use virt-manager through ssh on windows system:
+        * on virtual server: yum install "@X Window System" xorg-x11-xauth xorg-x11-fonts-* xorg-x11-utils
+        * on windows 10 debian console /etc/ssh/ssh_config
+            * ForwardAgent yes
+            * ForwardX11 yes
+            * ForwardX11Trusted yes
+            * Port 22
+            * Protocol 2
+            * GSSAPIAuthentication yes
+            * XauthLocation /usr/bin/xauth
+        * on windows 10 debian console ~/.bashrc
+            *export DISPLAY=localhost:0
+    * add zfs pool through virt-manager or virsh
     
     
 Integration of ZFS into OpenNebula
