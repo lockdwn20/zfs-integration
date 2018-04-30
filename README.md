@@ -34,6 +34,7 @@ Integration of ZFS into libvirt
     * vi /etc/yum.repos.d/libvirt.repo
         * Add local repo data
     * yum update
+    
 Integration of ZFS into OpenNebula
 
 1. Configuration of ZFS datastore
