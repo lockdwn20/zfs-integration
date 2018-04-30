@@ -28,9 +28,12 @@ Integration of ZFS into libvirt
         * Integrate ZFS into spec file
     * yum-buildep libvirt
     * rpmbuild -ba ~/rpmbuild/SPECS/libvirt.spec
-    
 1. Installation
-  
+    * yum install createrepo
+    * createrepo ~/rpmbuild/RPMS/x86_64
+    * vi /etc/yum.repos.d/libvirt.repo
+        * Add local repo data
+    * yum update
 Integration of ZFS into OpenNebula
 
 1. Configuration of ZFS datastore
