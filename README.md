@@ -52,4 +52,6 @@ Integration of ZFS into libvirt
     
 Integration of ZFS into OpenNebula
 
+1. Installed Opennebula Frontend and Node on single host with working ZFS
 1. Configuration of ZFS datastore
+   * Using Instructions from: https://github.com/OpenNebula/addon-zfs
