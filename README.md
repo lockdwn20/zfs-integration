@@ -55,3 +55,7 @@ Integration of ZFS into OpenNebula
 1. Installed Opennebula Frontend and Node on single host with working ZFS
 1. Configuration of ZFS datastore
    * Using Instructions from: https://github.com/OpenNebula/addon-zfs
+   * Configured default ONE system datastore from ssh to shared
+   * visudo -f /etc/sudoers.d/opennebula
+      * added a line for zfs with the zfs and dd commands added for passwordless sudo by oneadmin
+   * manually added the datastore through the GUI, the command line didn't seem to work   
